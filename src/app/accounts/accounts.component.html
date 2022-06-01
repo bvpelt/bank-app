@@ -1,0 +1,26 @@
+<h2>Accounts</h2>
+
+
+<li *ngFor="let account of accounts">
+  <ul class="heroes">
+    <li>
+      <button type="button">
+        <span class="badge">{{account.id}}</span>
+        <span class="number">{{account.number}}</span>
+        <span class="description">{{account.description}}</span>
+      </button>
+    </li>
+  </ul>
+</li>
+
+  <!--
+<div>
+    <label for="number">Account number: </label>
+    <input id="number" [(ngModel)]="account.number" placeholder="number">
+</div>
+
+<div>
+    <label for="description">Account description: </label>
+    <input id="description" [(ngModel)]="account.description" placeholder="description">
+</div>
+-->
