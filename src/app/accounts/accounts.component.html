@@ -11,14 +11,5 @@
 </ul>  
 
 <div *ngIf="selectedAccount">
-  <h2>{{selectedAccount.number | uppercase}} Account Details</h2>
-  <div>id: {{selectedAccount.id}}</div>
-  <div>
-    <label for="account-number">Account number: </label>
-    <input id="account-number" [(ngModel)]="selectedAccount.number" placeholder="number">
-  </div>
-  <div>
-    <label for="account-description">Account description: </label>
-    <input id="account-description" [(ngModel)]="selectedAccount.description" placeholder="description">
-  </div>
+  <app-account-detail [account]="selectedAccount"></app-account-detail>
 </div>
