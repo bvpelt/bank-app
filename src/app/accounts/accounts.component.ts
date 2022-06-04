@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from './account';
 import { AccountService } from '../services/account.service';
-import { MessageService } from '../services/message.service';
-
 
 @Component({
   selector: 'app-accounts',
@@ -11,21 +9,13 @@ import { MessageService } from '../services/message.service';
 })
 export class AccountsComponent implements OnInit {
 
-//  accounts = ACCOUNTS;
   accounts: Account[] = [];
 
-  selectedAccount?: Account;
-
-  constructor(private accountService: AccountService, private messageService: MessageService) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {   
     this.getAccounts(); 
-  }
-
-  onSelect(account: Account): void {
-    this.selectedAccount = account;
-    this.messageService.add(`AccountComponent: Selected account id=${account.id}`);
-  }
+  }  
   
   getAccounts(): void {
     this.accountService.getAccounts()

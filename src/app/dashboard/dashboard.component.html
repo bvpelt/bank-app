@@ -1,0 +1,6 @@
+<div class="heroes-menu">
+    <a *ngFor="let account of accounts"
+    routerLink="/detail/{{account.id}}">
+    {{account.number}} - {{account.description}}
+    </a>
+</div>

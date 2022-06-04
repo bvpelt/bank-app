@@ -1,14 +1,10 @@
 <h2>Accounts</h2>
 <ul class="accounts">
-  <li *ngFor="let account of accounts"  [class.selected]="account === selectedAccount"  (click)="onSelect(account)" >
-    <!--
-    <button [class.selected]="account === selectedAccount" type="button" (click)="onSelect(account)"></button>    
-    -->
-    <span class="badge">{{account.id}}</span>
-    <span class="number">{{account.number}}</span>
-    <span class="description">{{account.description}}</span> 
+  
+  <li *ngFor="let account of accounts">   
+    <a routerLink="/detail/{{account.id}}">
+      <span class="badge">{{account.id}}</span> {{account.number}}
+    </a>
   </li>
 </ul>  
 
-
-<app-account-detail [account]="selectedAccount"></app-account-detail>

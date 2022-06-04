@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Account} from '../accounts/account';
+import { AccountService} from '../services/account.service';
 
 @Component({
   selector: 'app-account-detail',
@@ -8,11 +12,27 @@ import { Account} from '../accounts/account';
 })
 export class AccountDetailComponent implements OnInit {
 
-  @Input() account?: Account;
+  account: Account | undefined;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private accountService: AccountService,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
+    this.getAccount();
   }
 
+  getAccount(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if ((id != null) && (id > 0)) {
+    this.accountService.getAccount(id)
+      .subscribe(account => this.account = account);
+    }
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }
