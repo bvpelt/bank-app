@@ -1,26 +1,24 @@
 <h2>Accounts</h2>
+<ul class="accounts">
+  <li *ngFor="let account of accounts"  [class.selected]="account === selectedAccount"  (click)="onSelect(account)" >
+    <!--
+    <button [class.selected]="account === selectedAccount" type="button" (click)="onSelect(account)"></button>    
+    -->
+    <span class="badge">{{account.id}}</span>
+    <span class="number">{{account.number}}</span>
+    <span class="description">{{account.description}}</span> 
+  </li>
+</ul>  
 
-
-<li *ngFor="let account of accounts">
-  <ul class="heroes">
-    <li>
-      <button type="button">
-        <span class="badge">{{account.id}}</span>
-        <span class="number">{{account.number}}</span>
-        <span class="description">{{account.description}}</span>
-      </button>
-    </li>
-  </ul>
-</li>
-
-  <!--
-<div>
-    <label for="number">Account number: </label>
-    <input id="number" [(ngModel)]="account.number" placeholder="number">
+<div *ngIf="selectedAccount">
+  <h2>{{selectedAccount.number | uppercase}} Account Details</h2>
+  <div>id: {{selectedAccount.id}}</div>
+  <div>
+    <label for="account-number">Account number: </label>
+    <input id="account-number" [(ngModel)]="selectedAccount.number" placeholder="number">
+  </div>
+  <div>
+    <label for="account-description">Account description: </label>
+    <input id="account-description" [(ngModel)]="selectedAccount.description" placeholder="description">
+  </div>
 </div>
-
-<div>
-    <label for="description">Account description: </label>
-    <input id="description" [(ngModel)]="account.description" placeholder="description">
-</div>
--->

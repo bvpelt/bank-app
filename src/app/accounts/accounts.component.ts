@@ -9,20 +9,16 @@ import { ACCOUNTS } from './mock-accounts';
 })
 export class AccountsComponent implements OnInit {
 
+  accounts = ACCOUNTS;
+  selectedAccount?: Account;
+
   constructor() { }
 
-  /*
-  account: Account = {
-    id: 1,
-    number: '123',
-    description: 'abn-amro'
+  ngOnInit(): void {    
   }
-*/
 
-  accounts = ACCOUNTS;
-
-  ngOnInit(): void {
-    
+  onSelect(account: Account): void {
+    this.selectedAccount = account;
   }
 
 }
