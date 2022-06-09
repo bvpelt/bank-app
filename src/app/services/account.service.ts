@@ -22,33 +22,42 @@ export class AccountService extends BaseService {
     super();    
     this.headers = this.makeSystemHeaders()
    }
-
-  /*
-  getAccounts(): Observable<Account[]> {
-    const accounts = of(ACCOUNTS);
-    this.messageService.add('AccountService: fetched accounts');
-    return accounts;
-  }
-  */
-  
+   
   /** GET accounts from the server */
-  getAccounts(): Observable<Account[]> {
-    
+  getAccounts(): Observable<Account[]> {    
     return this.http.get<Account[]>(this.accountsUrl, { responseType: 'json', headers: this.headers })
     .pipe(
-      tap(Account => this.logRes(Account),
-        catchError(this.handleError('getAccounts'))
+      tap(_ => this.logRes('fetched accounts'),
+        catchError(this.handleError<Account[]>('getAccounts', []))
       ))
   }
   
-  getAccount(id: number): Observable<Account> {
-    // For now, assume that a hero with the specified `id` always exists.
-    // Error handling will be added in the next step of the tutorial.
-    const account = ACCOUNTS.find(account => account.id === id)!;
-    this.messageService.add(`AccountService: fetched account id=${id}`);
-    return of(account);
+  getAccount(id: number): Observable<Account> {   
+    const url = `${this.accountsUrl}/${id}`;
+    return this.http.get<Account>(url, { responseType: 'json', headers: this.headers })
+    .pipe(
+      tap(_ => this.logRes(`fetched account id=${id}`),
+        catchError(this.handleError<Account>(`getAccount id=${id}`))
+      ))
   }
 
- 
- 
+  searchAccount(term: string): Observable<Account[]> {    
+    const url = `${this.accountsUrl}/search/${term}`;
+    return this.http.get<Account[]>(url, { responseType: 'json', headers: this.headers })
+    .pipe(
+      tap(_ => this.logRes(`searched accounts`),
+        catchError(this.handleError<Account[]>(`searchedAccounts`, []))
+      ))
+  } 
+
+  /** PUT: update the account on the server */
+  updateAccount(account: Account): Observable<any> {
+  const url = `${this.accountsUrl}/${account.id}`;
+  this.logRes("sending request to: " + url)
+  return this.http.put(url, account, { responseType: 'json', headers: this.headers })
+  .pipe(
+    tap(_ => this.logRes(`updated account id=${account.id}`)),
+    catchError(this.handleError<any>('updateAccount'))
+  );
+  }
 }

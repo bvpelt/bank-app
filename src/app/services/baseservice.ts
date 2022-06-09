@@ -1,9 +1,6 @@
 import {HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 
-
-
-
 export class BaseService {
 
   constructor() {}
@@ -53,7 +50,7 @@ export class BaseService {
 
    /** Log a httpService message with the MessageService */
    private log(message: string) {
-    console.log('a'+message);
+    console.log(message);
   }
 
   protected logRes<T>(result: T) {

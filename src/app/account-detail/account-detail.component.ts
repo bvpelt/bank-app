@@ -35,4 +35,11 @@ export class AccountDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    if (this.account) {
+      this.accountService.updateAccount(this.account)
+        .subscribe(() => this.goBack());
+    }
+  }
 }
