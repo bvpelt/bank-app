@@ -1,4 +1,4 @@
-import { Account } from './account';
+import Account  from './account';
 
 export const ACCOUNTS: Account[] = [
     { id: 1, number: '123', description: 'ing account'},

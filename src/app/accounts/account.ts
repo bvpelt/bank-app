@@ -1,5 +1,7 @@
-export interface Account {
-    id: number;
-    number:      string;
-	description: string;
+class Account {
+    id: number = 0;
+    number:      string = "";
+	description: string = "";
 }
+
+export default Account;

@@ -1,9 +1,11 @@
+
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Account} from '../accounts/account';
-import { AccountService} from '../services/account.service';
+
+import { AccountService } from '../services/account.service';
+import Account from '../accounts/account';
 
 @Component({
   selector: 'app-account-detail',
@@ -32,14 +34,32 @@ export class AccountDetailComponent implements OnInit {
     }
   }
 
+  // Reload accounts page
   goBack(): void {
-    this.location.back();
+    //this.location.back();
+    this.location.go("accounts")    
   }
 
   save(): void {
     if (this.account) {
+      if (this.account.id == 0) { // new account
+        this.accountService.insertAccount(this.account)
+        .subscribe(() => this.goBack());
+      } else {
       this.accountService.updateAccount(this.account)
         .subscribe(() => this.goBack());
+      }
+    }
+  }
+
+  newAccount(): void {    
+    this.account = new Account(); 
+  }
+
+  deleteAccount(): void {
+    if (this.account) {      
+      this.accountService.deleteAccount(this.account)
+        .subscribe(() => this.goBack());      
     }
   }
 }
